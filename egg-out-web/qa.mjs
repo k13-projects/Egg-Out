@@ -3,7 +3,7 @@ import fs from "node:fs";
 
 const OUT = "/tmp/qa";
 fs.mkdirSync(OUT, { recursive: true });
-const URL = process.env.QA_URL || "http://localhost:9149/";
+const URL = process.env.QA_URL || "http://localhost:9149/?noLenis=1";
 const VW = 1440, VH = 900;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

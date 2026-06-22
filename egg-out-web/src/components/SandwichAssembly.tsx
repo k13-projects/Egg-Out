@@ -32,7 +32,7 @@ const LAYERS: Layer[] = [
   {
     key: "bun-bottom",
     label: "Toasted lobster-roll base",
-    win: [0.06, 0.2],
+    win: [0.04, 0.15],
     from: "right",
     bottom: 0,
     height: 64,
@@ -46,7 +46,7 @@ const LAYERS: Layer[] = [
   {
     key: "egg",
     label: "Folded farm egg",
-    win: [0.2, 0.34],
+    win: [0.15, 0.27],
     from: "right",
     bottom: 46,
     height: 58,
@@ -60,7 +60,7 @@ const LAYERS: Layer[] = [
   {
     key: "lettuce",
     label: "Crisp lettuce",
-    win: [0.34, 0.48],
+    win: [0.27, 0.39],
     from: "right",
     bottom: 86,
     height: 46,
@@ -73,7 +73,7 @@ const LAYERS: Layer[] = [
   {
     key: "sauce",
     label: "House sauces",
-    win: [0.48, 0.6],
+    win: [0.39, 0.49],
     from: "right",
     bottom: 120,
     height: 26,
@@ -84,7 +84,7 @@ const LAYERS: Layer[] = [
   {
     key: "tomato",
     label: "Vine tomato",
-    win: [0.6, 0.72],
+    win: [0.49, 0.61],
     from: "right",
     bottom: 140,
     height: 40,
@@ -95,7 +95,7 @@ const LAYERS: Layer[] = [
   {
     key: "bun-top",
     label: "...and close it up",
-    win: [0.74, 0.9],
+    win: [0.61, 0.73],
     from: "top",
     bottom: 158,
     height: 120,
@@ -115,26 +115,25 @@ function StackLayer({
   layer: Layer;
   progress: MotionValue<number>;
 }) {
-  const [s, e] = layer.win;
-  const mid = s + (e - s) * 0.55;
+  // Entrance is the slide-in (x/y); layers stay fully opaque so the
+  // finished sandwich holds at the end of the scroll. Park them fully
+  // off-screen until their window so they "fly in" cleanly.
   const x = useTransform(
     progress,
     layer.win,
-    [layer.from === "right" ? 560 : 0, 0],
+    [layer.from === "right" ? 1000 : 0, 0],
   );
   const y = useTransform(
     progress,
     layer.win,
-    [layer.from === "top" ? -360 : 0, 0],
+    [layer.from === "top" ? -900 : 0, 0],
   );
-  const opacity = useTransform(progress, [s, mid], [0, 1]);
 
   return (
     <motion.div
       style={{
         x,
         y,
-        opacity,
         bottom: layer.bottom,
         height: layer.height,
         zIndex: layer.z,
@@ -182,9 +181,13 @@ export default function SandwichAssembly() {
     offset: ["start start", "end end"],
   });
 
-  // Finished sandwich flourish
-  const stackScale = useTransform(scrollYProgress, [0.9, 1], [1, 1.06]);
-  const steamOpacity = useTransform(scrollYProgress, [0.9, 0.96, 1], [0, 0.6, 0.4]);
+  // Finished sandwich flourish — completes by ~0.73, then holds to 1
+  const stackScale = useTransform(scrollYProgress, [0.73, 0.85], [1, 1.05]);
+  const steamOpacity = useTransform(
+    scrollYProgress,
+    [0.73, 0.82, 1],
+    [0, 0.6, 0.5],
+  );
 
   return (
     <section id="build" ref={ref} className="relative h-[360vh] bg-offwhite">

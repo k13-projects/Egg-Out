@@ -5,7 +5,23 @@
       "Bash(rm -f src/components/IntroReveal.tsx)",
       "Bash(curl -s -o /tmp/eggout-home.html -w \"%{http_code}\" http://localhost:3000/)",
       "Bash(rm -f /tmp/qa/*.png)",
-      "Bash(node qa.mjs)"
+      "Bash(node qa.mjs)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --max-time 8 http://localhost:9149/)",
+      "Bash(rm -rf /tmp/qa)",
+      "Bash(QA_URL=\"http://localhost:9149/\" node qa.mjs)",
+      "Bash(sed -i '' 's#http://localhost:9149/#http://localhost:9149/?noLenis=1#' diag.mjs)",
+      "Bash(node diag.mjs)",
+      "Bash(QA_URL=\"http://localhost:9149/?noLenis=1\" node qa.mjs)",
+      "Bash(md5 -q src/components/SandwichAssembly.tsx)",
+      "Bash(node diag3.mjs)",
+      "Bash(rm -f /tmp/qa/in-*.png)",
+      "Bash(node shoot-intro.mjs)",
+      "Bash(cd \"/Users/k13/Desktop/PROJECTS/Egg-Out/egg-out-web\" && rm -rf src/app/room shoot-static.mjs shoot-intro.mjs shoot-buildend.mjs diag.mjs diag2.mjs diag3.mjs /tmp/room-test.html && echo \"cleaned temp files\" && ls *.mjs 2>/dev/null && echo \"--- verify no room route ---\" && ls src/app/)",
+      "Bash(echo \"=== exit $? ===\")",
+      "Bash(git config *)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp"
     ]
   }
 }

@@ -26,14 +26,19 @@ const WALLS = [
 
 export default function KineticIntro() {
   const [done, setDone] = useState(false);
+  const [showRoom, setShowRoom] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    // Centered wordmark plays first on clean orange; mount the room after,
+    // so it bursts in (avoids any tiny far-room artifact at the start).
+    const room = setTimeout(() => setShowRoom(true), 750);
     const t = setTimeout(() => {
       document.body.style.overflow = "";
       setDone(true);
     }, 4200);
     return () => {
+      clearTimeout(room);
       clearTimeout(t);
       document.body.style.overflow = "";
     };
@@ -49,17 +54,17 @@ export default function KineticIntro() {
       animate={{ opacity: [1, 1, 1, 0] }}
       transition={{ duration: 4.2, times: [0, 0.55, 0.82, 1], ease: "easeInOut" }}
     >
-      {/* The 3D room — bursts open from the center */}
+      {/* The 3D room — dollies in from far via translateZ ONLY.
+          NEVER animate opacity/overflow/filter on a preserve-3d node:
+          that forces transform-style:flat and collapses the walls.
+          The whole intro fades out via the OUTER div's opacity instead. */}
+      {showRoom && (
       <motion.div
         className="absolute left-1/2 top-1/2"
         style={{ transformStyle: "preserve-3d" }}
-        initial={{ scale: 0.02, opacity: 0 }}
-        animate={{ scale: [0.02, 0.02, 1, 1, 1], opacity: [0, 0, 1, 1, 1] }}
-        transition={{
-          duration: 4.2,
-          times: [0, 0.22, 0.44, 0.8, 1],
-          ease: [0.16, 1, 0.3, 1],
-        }}
+        initial={{ z: -9000 }}
+        animate={{ z: 0 }}
+        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {WALLS.map((w) => (
           <div
@@ -83,6 +88,7 @@ export default function KineticIntro() {
           </div>
         ))}
       </motion.div>
+      )}
 
       {/* Centered wordmark — bursts/scales out as the room opens */}
       <motion.div
