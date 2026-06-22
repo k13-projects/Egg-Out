@@ -15,6 +15,7 @@ const capo = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://egg.k13projects.com"),
   title: "EGG & OUT · Your Anytime Egg Spot",
   description:
     "All-day, egg-forward eats in San Clemente. Now & later, all-day eggs.",
