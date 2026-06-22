@@ -26,7 +26,13 @@
       "Bash(sed -i '' 's#http://localhost:3000/#http://localhost:9149/#' shoot-intro.mjs)",
       "Bash(rm -f shoot-intro.mjs)",
       "Bash(command -v gh)",
-      "Bash(bash scripts/hm.sh --ship /tmp/hm-msg.txt)"
+      "Bash(bash scripts/hm.sh --ship /tmp/hm-msg.txt)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(rm -rf .next)",
+      "Bash(grep -q \"Ready\" /tmp/eggout-dev.log)",
+      "Bash(break)",
+      "Bash(curl -s -o /dev/null -w \"first: %{http_code}\\\\n\" --max-time 60 http://localhost:9149/)",
+      "Bash(curl -s -o /dev/null -w \"second: %{http_code}\\\\n\" --max-time 30 http://localhost:9149/)"
     ],
     "additionalDirectories": [
       "/private/tmp"

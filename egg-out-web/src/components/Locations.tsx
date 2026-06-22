@@ -16,7 +16,15 @@ export default function Locations() {
         <Reveal delay={0.1}>
           <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
             <div>
-              <h3 className="text-3xl font-medium tracking-tight">
+              <h3 className="flex items-center gap-3 text-3xl font-medium tracking-tight">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-7 w-7 shrink-0 text-farmer"
+                  fill="currentColor"
+                  aria-hidden
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+                </svg>
                 San Clemente
               </h3>
               <p className="mt-3 text-lg text-grill/70">Miramar Food Hall</p>
@@ -27,7 +35,7 @@ export default function Locations() {
                 Open daily
               </p>
               <p className="text-2xl font-medium text-farmer">
-                11:00 AM — 9:00 PM
+                8:00 AM to 3:00 PM
               </p>
             </div>
 

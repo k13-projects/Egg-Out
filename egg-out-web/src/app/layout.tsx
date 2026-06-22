@@ -15,7 +15,7 @@ const capo = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "EGG & OUT — Your Anytime Egg Spot",
+  title: "EGG & OUT · Your Anytime Egg Spot",
   description:
     "All-day, egg-forward eats in San Clemente. Now & later, all-day eggs.",
 };

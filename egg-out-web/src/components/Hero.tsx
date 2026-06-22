@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Badge from "./Badge";
+import { openModal } from "./modal/modalBus";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -38,7 +40,7 @@ export default function Hero() {
         </h1>
         <p className="mt-7 max-w-md text-lg leading-relaxed text-grill/70">
           An all-day, egg-forward kitchen in San Clemente. Sandwiches, burritos,
-          and the good stuff — cracked fresh from open to close.
+          and the good stuff, cracked fresh from open to close.
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-4">
           <a
@@ -47,13 +49,23 @@ export default function Hero() {
           >
             See the menu
           </a>
-          <a
-            href="#order"
+          <button
+            type="button"
+            onClick={() => openModal("order")}
             className="rounded-full bg-farmer px-7 py-3.5 text-base font-bold text-offwhite transition-transform duration-300 hover:scale-105 active:scale-95"
           >
             Order online
-          </a>
+          </button>
         </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 3.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none absolute right-[6%] top-[22%] z-10 hidden lg:block"
+      >
+        <Badge variant="yellow" size={168} />
       </motion.div>
 
       <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">

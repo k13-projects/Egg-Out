@@ -11,7 +11,7 @@ import { useRef } from "react";
 /**
  * Scroll-driven sandwich build (ref: cravburgers.shop).
  * Left = menu / description; right = ingredients fly in from the right and
- * stack as you scroll, then the lobster-roll bun closes on top.
+ * stack as you scroll, then the brioche roll closes on top.
  * Each layer is a CSS PLACEHOLDER — swap for an alpha-PNG ingredient
  * (see MEDIA-BRIEF.md "Ingredient layer set") when generated.
  */
@@ -31,7 +31,7 @@ type Layer = {
 const LAYERS: Layer[] = [
   {
     key: "bun-bottom",
-    label: "Toasted lobster-roll base",
+    label: "Toasted brioche-roll base",
     win: [0.04, 0.15],
     from: "right",
     bottom: 0,
@@ -202,8 +202,8 @@ export default function SandwichAssembly() {
               The Signature.
             </h2>
             <p className="mb-10 max-w-sm text-lg leading-relaxed text-grill/60">
-              Keep scrolling — we&apos;ll build it. Egg, greens, sauces, all
-              tucked into a toasted lobster-roll bun.
+              Keep scrolling, we&apos;ll build it. Egg, greens, sauces, all
+              tucked into a toasted brioche roll.
             </p>
             <ul className="flex flex-col gap-4">
               {LAYERS.map((l, i) => (
