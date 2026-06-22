@@ -1,0 +1,52 @@
+import { ImageResponse } from "next/og";
+
+// A fun sunny-side-up egg favicon — wobbly white + a Farmer Yolk yolk.
+// Code-generated so it stays crisp at every browser-tab size.
+export const size = { width: 64, height: 64 };
+export const contentType = "image/png";
+
+const egg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="yolk" cx="40%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffcd00"/>
+      <stop offset="55%" stop-color="#f2aa00"/>
+      <stop offset="100%" stop-color="#f26a22"/>
+    </radialGradient>
+  </defs>
+  <!-- wobbly fried egg white -->
+  <path fill="#fffdf6" stroke="#f0ebd7" stroke-width="1.5" d="
+    M33 5
+    C45 3 57 11 56 23
+    C61 30 56 39 59 47
+    C61 56 50 61 40 58
+    C33 60 27 57 19 59
+    C8 61 3 50 8 41
+    C3 33 6 22 13 17
+    C17 8 24 6 33 5 Z"/>
+  <!-- yolk -->
+  <circle cx="28" cy="29" r="13" fill="url(#yolk)"/>
+  <!-- glossy glint -->
+  <ellipse cx="23" cy="24" rx="4.2" ry="3" fill="#ffffff" opacity="0.85"/>
+</svg>`;
+
+export default function Icon() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+        }}
+      >
+        <img
+          width={64}
+          height={64}
+          src={`data:image/svg+xml,${encodeURIComponent(egg)}`}
+        />
+      </div>
+    ),
+    { ...size }
+  );
+}
