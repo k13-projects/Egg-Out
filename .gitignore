@@ -5,3 +5,6 @@
 # Editor / OS noise
 *.swp
 Thumbs.db
+
+# MS Office lock / temp files (e.g. ~$DOCUMENT.docx)
+~$*
