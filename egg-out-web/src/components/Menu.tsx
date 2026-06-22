@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import ModalTrigger from "./modal/ModalTrigger";
 
 // PLACEHOLDER menu — real menu PDF/items to be confirmed.
 const ITEMS = [
@@ -43,8 +44,12 @@ export default function Menu() {
             Our menu
           </p>
           <h2 className="max-w-3xl text-[11vw] font-light leading-[0.95] tracking-tight md:text-7xl">
-            Eggs, turned into art<span className="text-farmer">.</span>
+            Eggs lead the way<span className="text-farmer">.</span>
           </h2>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-grill/70">
+            Our menu is built around bold flavors, familiar favorites, and fresh
+            twists that work any time of day.
+          </p>
         </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
@@ -65,7 +70,7 @@ export default function Menu() {
                   <h3 className="text-2xl font-medium tracking-tight">
                     {item.name}
                   </h3>
-                  <span className="text-lg font-medium text-grill/40">$—</span>
+                  <span className="text-lg font-medium text-grill/40">$·</span>
                 </div>
                 <p className="mt-2 text-base leading-relaxed text-grill/60">
                   {item.desc}
@@ -77,18 +82,22 @@ export default function Menu() {
 
         <Reveal className="mt-20 flex flex-wrap items-center gap-4">
           <a
-            href="#menu"
+            href="/menu.pdf"
+            target="_blank"
+            rel="noopener"
             className="rounded-full bg-grill px-7 py-3.5 text-base font-bold text-offwhite transition-transform duration-300 hover:scale-105 active:scale-95"
           >
-            See full menu (PDF)
+            See Menu
           </a>
-          <a
-            href="#order"
+          <ModalTrigger
+            modal="order"
             className="rounded-full border-0 bg-farmer px-7 py-3.5 text-base font-bold text-offwhite transition-transform duration-300 hover:scale-105 active:scale-95"
           >
             Order online
-          </a>
-          <span className="text-sm text-grill/40">Menu items to be confirmed.</span>
+          </ModalTrigger>
+          <span className="text-sm text-grill/40">
+            Menu PDF &amp; items to be confirmed.
+          </span>
         </Reveal>
       </div>
     </section>

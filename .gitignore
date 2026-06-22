@@ -8,3 +8,4 @@ Thumbs.db
 
 # MS Office lock / temp files (e.g. ~$DOCUMENT.docx)
 ~$*
+.gstack/

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { openModal } from "./modal/modalBus";
 
 const LINKS = [
   { label: "About us", href: "#about" },
@@ -28,13 +29,15 @@ export default function Nav() {
       }`}
     >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-10">
-        <a href="#top" className="relative block h-7 w-[120px] shrink-0">
+        <a href="#top" className="relative block h-6 w-[168px] shrink-0">
           <Image
-            src="/assets/logotype-black.png"
+            src="/assets/logotype-white.png"
             alt="EGG & OUT"
             fill
             priority
+            sizes="168px"
             className="object-contain object-left"
+            style={{ filter: "brightness(0)" }}
           />
         </a>
 
@@ -51,12 +54,13 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a
-          href="#order"
+        <button
+          type="button"
+          onClick={() => openModal("order")}
           className="rounded-full bg-farmer px-5 py-2.5 text-sm font-bold text-offwhite transition-transform duration-300 hover:scale-105 active:scale-95"
         >
           Order now
-        </a>
+        </button>
       </nav>
     </header>
   );
