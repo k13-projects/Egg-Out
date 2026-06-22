@@ -45,26 +45,61 @@ Every non-trivial commit follows the **Hail Mary grouped-bullet** format. Tiny
 one-line fixes can stay one-line, but anything that implements a feature, ships
 a refactor, or changes user-visible behavior gets the full treatment.
 
-Structure:
+Structure (this is the locked house format — match it every time):
 
 1. **Subject line** — imperative, one sentence, **no emoji**, ≤ 72 chars. It
    should read like a headline a non-technical reader can grok.
 2. **Overview paragraph** — 2–5 sentences in plain language. What changed, why
    it mattered, what the visitor will notice. Avoid code identifiers here.
-3. **Grouped bullets** — the meat. Use a horizontal rule (`---`) +
-   `Technical details` heading, then bullets **grouped by file, area, or
-   concern**. Don't label sections "non-technical" / "technical" — the structure
-   speaks for itself.
-4. **Footer** — `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>`
+3. **Grouped bullets** — the meat. Horizontal rule (`---`) + a
+   `Technical details` heading, then bullets **grouped by area**, each group
+   led by an **emoji + short title** header (e.g. `🥚 The egg cursor — file.tsx`,
+   `🍳 Styling`, `🔌 Wiring`). One group per file/area/concern. The emoji is a
+   quick visual index, not decoration — pick one that fits the group's job.
+4. **🛤️ Build journey** — a **required** group whenever the work involved real
+   iteration: capture decisions made, **paths tried and rejected** (and *why*),
+   and **hidden constraints / gotchas discovered** (the "this bit us, remember
+   it" notes). This is what turns `git log` into a story future-us can learn
+   from. Skip only for truly mechanical one-liners.
+5. **Footer** — `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>`
    when Claude assisted.
 
-The commit is a **living historical record** — capture decisions made, paths
-considered and rejected, hidden constraints discovered. Future-you (and
-future-Claude reading `git log`) will thank present-you.
+**Voice:** write it like a human who enjoyed the work — warm, a little playful,
+genuinely useful. Fun and clear beat dry and formal; the goal is a build journal
+people *want* to read, not a changelog they skim. Never sacrifice substance for
+jokes — the decisions and gotchas are the point.
 
-**Emoji:** the subject line stays emoji-free. A tasteful 🥚 (or other) marker is
-fine inside the body as a group header — don't overuse it, and never put one on
-the subject.
+The commit is a **living historical record**. Future-you (and future-Claude
+reading `git log`) will thank present-you.
+
+**Emoji:** the subject line stays emoji-free, always. Inside the body, every
+`Technical details` group gets a leading emoji header — that's the structure, so
+use them consistently (don't sprinkle emoji mid-bullet, and never on the
+subject).
+
+Skeleton:
+
+```
+<imperative subject, no emoji, ≤72 chars>
+
+<plain-language overview, 2–5 sentences, what the visitor notices>
+
+---
+
+Technical details
+
+🥚 <area> — <file/path>
+- <what changed and why>
+
+🍳 <another area>
+- <…>
+
+🛤️ Build journey — decisions made & paths rejected (for future-us)
+- <a path we tried and dropped, and why>
+- <a hidden constraint / gotcha we hit>
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+```
 
 ---
 
