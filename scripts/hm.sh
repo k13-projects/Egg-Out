@@ -21,7 +21,7 @@ git push -u origin HEAD
 echo "→ pushed $(git rev-parse --abbrev-ref HEAD)"
 if [ "$ship" -eq 1 ]; then
   if command -v gh >/dev/null; then
-    gh pr create --fill
+    gh pr create --fill --base main   # always target the main integration branch
     num=$(gh pr view --json number -q .number)
     gh pr merge "$num" --merge   # real merge; no squash/rebase, no --delete-branch (keep every ego_* branch)
   else echo "hm++ needs GitHub CLI (gh) for PR + merge."; fi
