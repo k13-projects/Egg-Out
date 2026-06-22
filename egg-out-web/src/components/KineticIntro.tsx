@@ -32,11 +32,11 @@ export default function KineticIntro() {
     document.body.style.overflow = "hidden";
     // Centered wordmark plays first on clean orange; mount the room after,
     // so it bursts in (avoids any tiny far-room artifact at the start).
-    const room = setTimeout(() => setShowRoom(true), 750);
+    const room = setTimeout(() => setShowRoom(true), 700);
     const t = setTimeout(() => {
       document.body.style.overflow = "";
       setDone(true);
-    }, 4200);
+    }, 5000);
     return () => {
       clearTimeout(room);
       clearTimeout(t);
@@ -52,19 +52,21 @@ export default function KineticIntro() {
       style={{ perspective: 600, perspectiveOrigin: "50% 50%" }}
       initial={{ opacity: 1 }}
       animate={{ opacity: [1, 1, 1, 0] }}
-      transition={{ duration: 4.2, times: [0, 0.55, 0.82, 1], ease: "easeInOut" }}
+      transition={{ duration: 5.0, times: [0, 0.78, 0.9, 1], ease: "easeInOut" }}
     >
-      {/* The 3D room — dollies in from far via translateZ ONLY.
-          NEVER animate opacity/overflow/filter on a preserve-3d node:
-          that forces transform-style:flat and collapses the walls.
-          The whole intro fades out via the OUTER div's opacity instead. */}
+      {/* The 3D room — SPIRALS in: translateZ (dolly) + rotateZ (spin) for a
+          multi-dimensional spiral feel, then keeps flying forward through the
+          back so the end resolves instead of freezing. Animate ONLY transforms
+          here (z/rotate) — opacity/overflow/filter would force
+          transform-style:flat and collapse the walls. The intro fades out via
+          the OUTER div's opacity. */}
       {showRoom && (
       <motion.div
         className="absolute left-1/2 top-1/2"
         style={{ transformStyle: "preserve-3d" }}
-        initial={{ z: -9000 }}
-        animate={{ z: 0 }}
-        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ z: -11000, rotate: -240 }}
+        animate={{ z: [-11000, 0, 0, 1400], rotate: [-240, 0, 0, 70] }}
+        transition={{ duration: 3.8, times: [0, 0.5, 0.72, 1], ease: [0.22, 1, 0.32, 1] }}
       >
         {WALLS.map((w) => (
           <div
@@ -90,12 +92,13 @@ export default function KineticIntro() {
       </motion.div>
       )}
 
-      {/* Centered wordmark — bursts/scales out as the room opens */}
+      {/* Centered wordmark — stays FIXED (no zoom into the camera), then
+          fades out once the spiralling text has wrapped the whole room. */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
-        initial={{ opacity: 0, scale: 1 }}
-        animate={{ opacity: [0, 1, 1, 0], scale: [1, 1, 1.6, 9] }}
-        transition={{ duration: 4.2, times: [0, 0.1, 0.24, 0.42], ease: "easeIn" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1, 1, 0] }}
+        transition={{ duration: 5.0, times: [0, 0.1, 0.55, 0.66], ease: "easeInOut" }}
       >
         <span className="text-3xl font-bold uppercase tracking-[0.3em] text-grill md:text-5xl">
           EGG &amp; OUT

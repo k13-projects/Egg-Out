@@ -18,7 +18,15 @@
       "Bash(node shoot-intro.mjs)",
       "Bash(cd \"/Users/k13/Desktop/PROJECTS/Egg-Out/egg-out-web\" && rm -rf src/app/room shoot-static.mjs shoot-intro.mjs shoot-buildend.mjs diag.mjs diag2.mjs diag3.mjs /tmp/room-test.html && echo \"cleaned temp files\" && ls *.mjs 2>/dev/null && echo \"--- verify no room route ---\" && ls src/app/)",
       "Bash(echo \"=== exit $? ===\")",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --max-time 8 http://localhost:3000/)",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)",
+      "Bash(sed -i '' 's#http://localhost:3000/#http://localhost:9149/#' shoot-intro.mjs)",
+      "Bash(rm -f shoot-intro.mjs)",
+      "Bash(command -v gh)",
+      "Bash(bash scripts/hm.sh --ship /tmp/hm-msg.txt)"
     ],
     "additionalDirectories": [
       "/private/tmp"
