@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------
+   EGG & OUT — brand design tokens (light & airy direction)
+---------------------------------------------------------- */
+@theme {
+  /* Yolk palette */
+  --color-farmer: #f26a22;       /* lead orange */
+  --color-freerange: #ec8b00;
+  --color-broken: #f2aa00;
+  --color-scrambled: #f7e859;
+  --color-sunny: #ffcd00;
+  /* Neutrals */
+  --color-offwhite: #f0ebd7;
+  --color-kraft: #b59d7b;
+  --color-grill: #212121;
+  --color-red: #c80f2e;
+
+  --font-capo: "Capo", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--color-offwhite);
+  color: var(--color-grill);
+  font-family: var(--font-capo);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-farmer);
+  color: var(--color-offwhite);
+}
+
+/* Kinetic marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track.reverse { animation-direction: reverse; }
+
+/* Slow spin for the rotating badge */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 18s linear infinite; }
+
+/* ----------------------------------------------------------
+   Runny-egg cursor — yolk leads, whites trail (see CursorEgg)
+---------------------------------------------------------- */
+@media (pointer: fine) {
+  html.egg-cursor,
+  html.egg-cursor * { cursor: none !important; }
+}
+
+.egg-cursor-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* spring-driven follow point (x/y set by framer) */
+.egg-cursor-follow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* keeps the blob centred on the pointer regardless of its own transforms.
+   perspective gives the flip real depth; line-height:0 kills inline gaps. */
+.egg-cursor-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  perspective: 520px;
+  line-height: 0;
+}
+
+/* flip wrapper (whole egg) + shake wrapper (yolk only) — transform layers
+   kept separate from the squash/hover transforms on the visuals below. */
+.egg-cursor-flip {
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+.egg-cursor-shake {
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+/* The cooked yolk: a 3D two-faced disc — glossy top in front, a slightly
+   crisped/browned underside in back, revealed mid-flip. */
+.egg-cursor-yolk {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  transform-style: preserve-3d;
+}
+.yolk-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  animation: egg-wobble 2.8s ease-in-out infinite;
+}
+/* front: glossy farmer-yolk dome with a fixed top-left shine */
+.yolk-front {
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff6d8 0%,
+      #ffcd00 16%,
+      #f2aa00 44%,
+      #f26a22 80%,
+      #d2521a 100%
+    );
+  box-shadow:
+    0 4px 10px -2px rgba(210, 82, 26, 0.45),
+    inset -2px -3px 6px rgba(178, 60, 10, 0.45),
+    inset 2px 2px 5px rgba(255, 246, 216, 0.75);
+}
+/* back: the pan-side — cooked egg-white, with a few golden-brown crispy
+   patches and a faintly browned rim. Tasty, not overcooked. */
+.yolk-back {
+  transform: rotateX(180deg);
+  background:
+    radial-gradient(circle at 32% 36%, rgba(176, 116, 38, 0.55) 0%, rgba(176, 116, 38, 0) 30%),
+    radial-gradient(circle at 66% 62%, rgba(150, 92, 30, 0.5) 0%, rgba(150, 92, 30, 0) 28%),
+    radial-gradient(circle at 62% 28%, rgba(224, 178, 84, 0.55) 0%, rgba(224, 178, 84, 0) 24%),
+    radial-gradient(circle at 38% 66%, rgba(208, 150, 60, 0.4) 0%, rgba(208, 150, 60, 0) 22%),
+    radial-gradient(circle at 50% 48%, #fff9ef 0%, #f7eede 58%, #ecdcc0 100%);
+  box-shadow:
+    inset 0 0 4px rgba(120, 80, 30, 0.4),
+    inset -1px -1px 4px rgba(150, 100, 40, 0.38);
+}
+
+/* The whites: clearly white egg-white pools that drag behind the yolk.
+   Soft shadow + faint edge so they read against the cream page. */
+.egg-cursor-white {
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 42% 38%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 252, 244, 0.8) 50%,
+    rgba(255, 250, 238, 0.55) 78%,
+    rgba(255, 250, 238, 0) 100%
+  );
+  box-shadow: 0 3px 9px -2px rgba(150, 120, 70, 0.35);
+  animation: egg-wobble 3.6s ease-in-out infinite;
+}
+
+/* grease residue: faint warm-brown streaks the egg leaves behind as it
+   moves, oriented along travel, blurred and lopsided so they read as smear. */
+.egg-cursor-residue {
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(74, 56, 38, 0.9) 0%,
+    rgba(74, 56, 38, 0.5) 60%,
+    rgba(74, 56, 38, 0) 100%
+  );
+  filter: blur(1px);
+  animation: egg-blob 4.5s ease-in-out infinite;
+}
+
+/* organic morph for the yolk — subtle, stays round-ish */
+@keyframes egg-wobble {
+  0%,
+  100% { border-radius: 47% 53% 56% 44% / 55% 46% 54% 45%; }
+  50% { border-radius: 54% 46% 44% 56% / 45% 55% 46% 54%; }
+}
+
+/* The whites get a lopsided, ever-shifting egg shape — one side fat,
+   one side pinched, never the same silhouette twice as it loops. */
+.egg-cursor-white { animation-name: egg-blob; }
+@keyframes egg-blob {
+  0%,
+  100% { border-radius: 38% 62% 63% 37% / 58% 41% 59% 42%; }
+  20%  { border-radius: 66% 34% 40% 60% / 45% 63% 37% 55%; }
+  40%  { border-radius: 45% 55% 30% 70% / 65% 35% 65% 35%; }
+  60%  { border-radius: 60% 40% 58% 42% / 38% 62% 38% 62%; }
+  80%  { border-radius: 35% 65% 55% 45% / 52% 48% 60% 40%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .egg-cursor-yolk,
+  .egg-cursor-white { animation: none; }
+}

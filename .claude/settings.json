@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Notion__notion-search",
+      "Bash(rm -f src/components/IntroReveal.tsx)",
+      "Bash(curl -s -o /tmp/eggout-home.html -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(rm -f /tmp/qa/*.png)",
+      "Bash(node qa.mjs)"
+    ]
+  }
+}
