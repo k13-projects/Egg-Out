@@ -17,11 +17,15 @@ const TILE = "EGG & OUT  ".repeat(200);
 const X = 720; // half width
 const Y = 460; // half height
 const D = 2200; // room depth
+// Every wall flows its text INTO the depth (toward the vanishing point) so all
+// four read cleanly as a receding type-tunnel. Floor/ceiling are the side-wall
+// setup rotated flat (rotateZ ±90), which keeps their text running into depth
+// instead of stacking/flipping (the old rotateX planes tangled and inverted).
 const WALLS = [
   { key: "left", w: D, h: 2 * Y, t: `translateX(-${X}px) rotateY(90deg)` },
   { key: "right", w: D, h: 2 * Y, t: `translateX(${X}px) rotateY(-90deg)` },
-  { key: "floor", w: 2 * X, h: D, t: `translateY(${Y}px) rotateX(-90deg)` },
-  { key: "ceiling", w: 2 * X, h: D, t: `translateY(-${Y}px) rotateX(90deg)` },
+  { key: "floor", w: D, h: 2 * X, t: `translateY(${Y}px) rotateZ(-90deg) rotateY(90deg)` },
+  { key: "ceiling", w: D, h: 2 * X, t: `translateY(-${Y}px) rotateZ(90deg) rotateY(90deg)` },
 ];
 
 export default function KineticIntro() {

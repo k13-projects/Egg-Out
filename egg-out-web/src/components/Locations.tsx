@@ -35,7 +35,7 @@ export default function Locations() {
                 Open daily
               </p>
               <p className="text-2xl font-medium text-farmer">
-                8:00 AM to 3:00 PM
+                8:00 AM to 2:00 PM
               </p>
             </div>
 
