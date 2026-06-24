@@ -41,7 +41,7 @@ export default function Footer() {
 
         <div className="mt-20 flex flex-col gap-2 border-0 text-sm text-offwhite/40 md:flex-row md:justify-between">
           <p>© {2026} Egg &amp; Out · Tiger Hospitality Group</p>
-          <p>San Clemente, CA · Daily 8:00 AM to 3:00 PM</p>
+          <p>San Clemente, CA · Daily 8:00 AM to 2:00 PM</p>
         </div>
       </div>
     </footer>
