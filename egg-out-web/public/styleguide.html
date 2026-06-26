@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Egg &amp; Out DNA | Design System &amp; Style Guide</title>
+<meta name="description" content="Egg & Out (San Clemente) / K13 Software Studio design system — the project DNA: the Yolk palette, Capo type, signature motion, and components as built across the website.">
+<style>
+/* Self-hosted Capo — the brand typeface, the same .otf files the live site ships. */
+@font-face{font-family:'Capo';src:url('/fonts/capo-light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Capo';src:url('/fonts/capo-medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Capo';src:url('/fonts/capo-bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  /* Brand — exact hex from the EGG & OUT standards PDF / src/app/globals.css @theme tokens */
+  --farmer:#f26a22;       /* lead orange — CTAs, accents, the period dot */
+  --freerange:#ec8b00;
+  --broken:#f2aa00;
+  --scrambled:#f7e859;
+  --sunny:#ffcd00;
+  --offwhite:#f0ebd7;     /* page background */
+  --kraft:#b59d7b;        /* warm neutral */
+  --grill:#212121;        /* near-black — body text, dark CTA, footer */
+  --red:#c80f2e;          /* optional accent */
+  --white:#fff;
+  --gray:#6b6256;         /* muted warm text */
+  --line:#e2dcc6;         /* borders / dividers on cream */
+  --green:#1f7a44;--amber:#b06a00;
+  --font:'Capo',ui-sans-serif,system-ui,sans-serif;
+  --radius:1rem;
+  --shadow:0 14px 40px rgba(120,60,10,.12);
+  --grad:linear-gradient(135deg,#f26a22 0%,#f2aa00 55%,#ffcd00 100%);
+  --transition:all .3s cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font);color:var(--grill);line-height:1.7;font-size:16px;background:var(--offwhite);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:300;letter-spacing:-.01em;line-height:1.05}
+p{color:var(--gray)}
+code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.82em;background:rgba(242,106,34,.12);color:#b8480f;padding:2px 7px;border-radius:5px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.wave{width:100%;line-height:0;overflow:hidden}.wave svg{width:100%;height:70px;display:block}
+
+/* hero */
+.hero{background:var(--grad);color:var(--grill);text-align:center;padding:54px 24px 90px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 18%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
+.hero-in{position:relative;z-index:1;max-width:920px;margin:0 auto}
+.hero .eyebrow{display:inline-block;background:rgba(33,33,33,.10);border:1px solid rgba(33,33,33,.18);color:var(--grill);padding:6px 20px;border-radius:40px;font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(2.6rem,8vw,5.5rem);margin-bottom:10px;text-transform:uppercase;letter-spacing:-.02em;font-weight:300}
+.hero h1 .dot{color:var(--white)}
+.hero .sub{font-size:clamp(1rem,2vw,1.3rem);color:rgba(33,33,33,.72);font-weight:500}
+.hero .meta{margin-top:26px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(33,33,33,.66);font-weight:500}
+.hero .meta strong{color:var(--grill)}
+
+/* TOC */
+.toc{background:rgba(240,235,215,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.toc-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;justify-content:center}
+.toc a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--grill);text-decoration:none;padding:6px 12px;border-radius:20px;transition:var(--transition)}
+.toc a:hover{background:var(--farmer);color:var(--offwhite)}
+
+/* section */
+.sg-section{padding:48px 0 22px}
+.sg-label{display:inline-block;background:var(--grill);color:var(--offwhite);padding:6px 18px;border-radius:40px;font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.sg-section>.wrap>h2{font-size:clamp(2rem,4.5vw,3.2rem);color:var(--grill);margin-bottom:10px;text-transform:uppercase}
+.sg-section>.wrap>h2 .dot{color:var(--farmer)}
+.sg-section>.wrap>.intro{max-width:760px;margin-bottom:26px;font-size:1.05rem}
+.sub-h{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);font-weight:700;margin:24px 0 12px}
+
+/* color swatches */
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.sw{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sw-chip{height:88px;display:flex;align-items:flex-end;padding:8px 12px;font-size:.78rem;font-weight:700;font-family:'SF Mono',Menlo,monospace}
+.sw-meta{padding:12px 14px}.sw-meta b{display:block;font-size:.95rem;color:var(--grill);font-weight:700}.sw-meta code{display:inline-block;margin:4px 0;font-size:.72rem}.sw-meta span{display:block;font-size:.78rem;color:var(--gray)}
+
+/* component item */
+.sg-item{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;margin-bottom:22px;scroll-margin-top:80px}
+.sg-item-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.sg-item-head h3{font-size:1.2rem;color:var(--grill);font-weight:700}
+.sg-ref{margin-left:auto;background:rgba(242,106,34,.12);color:#b8480f;font-weight:600}
+.sg-desc{font-size:.95rem;margin-bottom:18px}
+.sg-demo{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+@media(max-width:760px){.sg-demo{grid-template-columns:1fr}}
+.sg-stage{border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;min-height:120px;overflow:hidden}
+.sg-spec dl{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:.85rem}
+.sg-spec dt{font-weight:700;color:var(--grill);white-space:nowrap}
+.sg-spec dd{color:var(--gray)}
+.sg-note{margin-top:14px;font-size:.82rem;color:var(--gray);background:var(--offwhite);border-left:3px solid var(--farmer);padding:10px 14px;border-radius:6px}
+
+/* ===== AUTHENTIC EGG & OUT COMPONENT STYLES ===== */
+/* pill CTAs — rounded-full px-7 py-3.5 font-bold, hover:scale-105 active:scale-95 */
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:9999px;padding:.875rem 1.75rem;font-family:var(--font);font-weight:700;font-size:1rem;border:none;cursor:pointer;text-decoration:none;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.btn:hover{transform:scale(1.05)}.btn:active{transform:scale(.95)}
+.btn-farmer{background:var(--farmer);color:var(--offwhite)}
+.btn-grill{background:var(--grill);color:var(--offwhite)}
+.btn-sm{padding:.625rem 1.25rem;font-size:.875rem}
+/* form field — catering modal: rounded-xl bg-grill/5, focus ring farmer */
+.fg{text-align:left;width:100%;max-width:340px}
+.fg input,.fg select{width:100%;padding:.75rem 1rem;border:none;border-radius:.75rem;background:rgba(33,33,33,.05);font-family:var(--font);font-size:1rem;color:var(--grill);box-shadow:0 0 0 1px transparent;outline:none;transition:var(--transition)}
+.fg input::placeholder{color:rgba(33,33,33,.35)}
+.fg input:focus,.fg select:focus{background:rgba(33,33,33,.07);box-shadow:0 0 0 1px var(--farmer)}
+/* menu card */
+.eo-card{width:240px}
+.eo-card .thumb{aspect-ratio:1;border-radius:1.5rem;overflow:hidden;position:relative}
+.eo-card .thumb i{position:absolute;inset:0;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.eo-card:hover .thumb i{transform:scale(1.1)}
+.eo-card .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:14px}
+.eo-card h4{font-size:1.25rem;font-weight:500;color:var(--grill)}
+.eo-card .price{color:rgba(33,33,33,.4);font-weight:500}
+.eo-card p{font-size:.85rem;margin-top:4px}
+/* rotating badge stamp */
+.stamp{position:relative;width:130px;height:130px}
+.stamp .ring{position:absolute;inset:0;animation:spin-slow 18s linear infinite}
+.stamp .ring svg{width:100%;height:100%}
+.stamp .yolk{position:absolute;left:50%;top:50%;width:21px;height:21px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d8 0%,#ffcd00 22%,#f2aa00 55%,#f26a22 100%);box-shadow:0 2px 6px -1px rgba(210,82,26,.5)}
+/* marquee */
+.mq{width:100%;background:var(--farmer);color:var(--offwhite);overflow:hidden;border-radius:10px;padding:12px 0}
+.mq-track{display:inline-flex;white-space:nowrap;font-weight:700;font-size:1.5rem;letter-spacing:-.01em;animation:marquee 14s linear infinite}
+/* runny-egg cursor mini */
+.cursor-demo{position:relative;width:120px;height:60px}
+.cursor-yolk{position:absolute;left:60px;top:18px;width:22px;height:22px;border-radius:47% 53% 56% 44%/55% 46% 54% 45%;background:radial-gradient(circle at 35% 30%,#fff6d8 0%,#ffcd00 16%,#f2aa00 44%,#f26a22 80%,#d2521a 100%);box-shadow:0 4px 10px -2px rgba(210,82,26,.45);animation:wobble 2.8s ease-in-out infinite;z-index:2}
+.cursor-white{position:absolute;left:40px;top:14px;width:30px;height:30px;border-radius:38% 62% 63% 37%/58% 41% 59% 42%;background:radial-gradient(circle at 42% 38%,rgba(255,255,255,.92),rgba(255,250,238,0));box-shadow:0 3px 9px -2px rgba(150,120,70,.35);animation:blob 3.6s ease-in-out infinite}
+/* headline-flush demo */
+.flush-demo{font-weight:300;font-size:2.4rem;line-height:1;text-transform:uppercase;color:var(--grill)}
+.flush-demo .a{display:block;outline:1px dashed var(--line)}
+.flush-demo .b{display:block;text-indent:-.09em;outline:1px dashed var(--farmer)}
+/* chips */
+.chip{display:inline-block;padding:5px 16px;border-radius:50px;font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.chip-farmer{background:rgba(242,106,34,.14);color:#b8480f}
+.chip-grill{background:rgba(33,33,33,.08);color:var(--grill)}
+.chip-sunny{background:rgba(255,205,0,.28);color:#8a6a00}
+
+/* motion demos */
+.anim-demo{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.anim-box{width:96px;height:64px;border-radius:12px;background:var(--offwhite);color:var(--grill);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;text-align:center;border:1px solid var(--line)}
+.demo-fadeup{animation:fadeUp .9s cubic-bezier(.22,1,.36,1) infinite alternate}
+.demo-scalein{animation:scaleIn .7s cubic-bezier(.22,1,.36,1) infinite alternate}
+.float-demo{animation:float 1.6s ease-in-out infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+@keyframes fadeUp{from{opacity:.3;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes scaleIn{from{opacity:.4;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes wobble{0%,100%{border-radius:47% 53% 56% 44%/55% 46% 54% 45%}50%{border-radius:54% 46% 44% 56%/45% 55% 46% 54%}}
+@keyframes blob{0%,100%{border-radius:38% 62% 63% 37%/58% 41% 59% 42%}40%{border-radius:45% 55% 30% 70%/65% 35% 65% 35%}80%{border-radius:35% 65% 55% 45%/52% 48% 60% 40%}}
+
+footer{background:var(--grill);color:var(--offwhite);text-align:center;padding:46px 24px;margin-top:30px}
+footer .fl{font-size:1.5rem;font-weight:300;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+footer .fl .dot{color:var(--farmer)}
+footer p{color:rgba(240,235,215,.7);font-size:.85rem;letter-spacing:.04em}
+footer .studio{margin-top:14px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,215,.5)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{body{background:#fff}.sg-item,.sw{box-shadow:none;border:1px solid var(--line)}.toc{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Design System &middot; Project DNA</div>
+    <h1>Egg &amp; Out<span class="dot">.</span></h1>
+    <p class="sub">Now &amp; later, all-day eggs — the brand, in code.</p>
+    <p class="meta">San&nbsp;Clemente, CA &nbsp;&bull;&nbsp; egg.k13projects.com &nbsp;&bull;&nbsp; by <strong>K13 Software Studio</strong></p>
+  </div>
+</header>
+<div class="wave"><svg viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="#f0ebd7"/></svg></div>
+
+<nav class="toc"><div class="toc-in">
+  <a href="#colors">Colors</a>
+  <a href="#type">Typography</a>
+  <a href="#motion">Motion</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#forms">Forms</a>
+  <a href="#components">Components</a>
+  <a href="#patterns">Patterns</a>
+  <a href="#foundations">Tokens</a>
+</div></nav>
+
+<!-- COLORS -->
+<section class="sg-section" id="colors">
+  <div class="wrap">
+    <span class="sg-label">Foundations</span>
+    <h2>Color Palette</h2>
+    <p class="intro">Drawn from egg yolks and an orange-forward standards PDF. <strong>Farmer Yolk leads</strong>; a ladder of warmer yolks supports it, on a soft cream (<code>Off White</code>) ground with near-black <code>Grill</code> for type. Exact hex from <code>src/app/globals.css</code> <code>@theme</code>.</p>
+    <div class="sub-h">Primary — Yolk oranges</div>
+    <div class="sw-grid">
+      <div class="sw"><div class="sw-chip" style="background:#f26a22;color:#fff">#F26A22</div><div class="sw-meta"><b>Farmer Yolk</b><code>--color-farmer</code><span>Lead — CTAs, links, the accent period</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#ec8b00;color:#fff">#EC8B00</div><div class="sw-meta"><b>Free Range Yolk</b><code>--color-freerange</code><span>Secondary orange</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#f2aa00;color:#5c3a00">#F2AA00</div><div class="sw-meta"><b>Broken Yolk</b><code>--color-broken</code><span>Mid amber — gradients</span></div></div>
+    </div>
+    <div class="sub-h">Secondary — Yellows</div>
+    <div class="sw-grid">
+      <div class="sw"><div class="sw-chip" style="background:#f7e859;color:#5c521f">#F7E859</div><div class="sw-meta"><b>Scrambled Egg</b><code>--color-scrambled</code><span>Bright highlight</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#ffcd00;color:#5c4a00">#FFCD00</div><div class="sw-meta"><b>Sunny Up</b><code>--color-sunny</code><span>Warm yellow — kicker text on dark</span></div></div>
+    </div>
+    <div class="sub-h">Neutrals &amp; optional</div>
+    <div class="sw-grid">
+      <div class="sw"><div class="sw-chip" style="background:#f0ebd7;color:#212121">#F0EBD7</div><div class="sw-meta"><b>Off White</b><code>--color-offwhite</code><span>Page background, light text on dark</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#b59d7b;color:#fff">#B59D7B</div><div class="sw-meta"><b>Kraft</b><code>--color-kraft</code><span>Warm neutral — placeholder fills</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#212121;color:#f0ebd7">#212121</div><div class="sw-meta"><b>Grill</b><code>--color-grill</code><span>Body text, dark CTA, footer, modal scrim</span></div></div>
+      <div class="sw"><div class="sw-chip" style="background:#c80f2e;color:#fff">#C80F2E</div><div class="sw-meta"><b>Red</b><code>--color-red</code><span>Optional — tomato layer accent</span></div></div>
+    </div>
+    <p class="sg-note">Selection highlight uses Farmer on Off White (<code>::selection</code>). Green Tea / Blue Jean from the PDF are PMS-only optional accents and are intentionally unused on the site.</p>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="sg-section" id="type" style="background:#fff">
+  <div class="wrap">
+    <span class="sg-label">Foundations</span>
+    <h2>Typography</h2>
+    <p class="intro">One self-hosted family does everything: <strong>Capo</strong> (Light&nbsp;300, Medium&nbsp;500, Bold&nbsp;700) — loaded via <code>next/font/local</code> from <code>src/fonts/*.otf</code>. The look is <strong>Capo Light at huge display sizes</strong>, tight tracking, a Farmer-orange period as punctuation. Eyebrows are Medium, uppercase, widely tracked.</p>
+    <div class="sg-item" id="type-scale">
+      <div class="sg-item-head"><h3>Type Scale</h3><code class="sg-ref">Capo 300 / 500 / 700</code></div>
+      <p class="sg-desc">Display headings, kicker, and body exactly as rendered on the site.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:#fff"><div style="text-align:left;width:100%">
+          <div style="font-size:.72rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--farmer);margin-bottom:8px">Your Anytime Egg Spot</div>
+          <div style="font-size:clamp(2.4rem,7vw,4.5rem);font-weight:300;line-height:.9;letter-spacing:-.02em;text-transform:uppercase;color:var(--grill)">Now &amp;<br>Later<span style="color:var(--farmer)">.</span></div>
+          <div style="font-size:1.6rem;font-weight:500;color:var(--grill);margin-top:6px">All-day eggs.</div>
+          <p style="margin-top:10px">Body copy — 1.125rem, line-height 1.7, color <code>grill/70</code>. <strong style="font-weight:700">Bold</strong> and <span style="color:var(--farmer);font-weight:500">Medium</span> for emphasis.</p>
+        </div></div>
+        <div class="sg-spec"><dl>
+          <dt>Family</dt><dd>'Capo', self-hosted .otf (next/font/local)</dd>
+          <dt>Weights</dt><dd>300 Light · 500 Medium · 700 Bold</dd>
+          <dt>Display H1</dt><dd>text-[9rem] (15vw mobile) · 300 · leading .9 · uppercase</dd>
+          <dt>Section H2</dt><dd>~text-7xl · 300 · leading .95</dd>
+          <dt>Kicker</dt><dd>.875rem · 500 · uppercase · tracking .35em</dd>
+          <dt>Body</dt><dd>1.125rem / 1.7 · grill at 60–70% opacity</dd>
+          <dt>Note</dt><dd>Capo Black exists in the standards but is <em>not bundled</em> — not used</dd>
+        </dl></div>
+      </div>
+    </div>
+    <div class="sg-item" id="flush">
+      <div class="sg-item-head"><h3>Optical flush (signature detail)</h3><code class="sg-ref">.headline-flush · -mid · -open</code></div>
+      <p class="sg-desc">A flush-left display glyph carries a left side-bearing, so its ink sits inward of the kicker/paragraph edge. A negative <code>text-indent</code> (em-based, bucketed by letter shape) pulls it back so the eye reads one clean left edge. The careful bit that makes the type feel set, not placed.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite)"><div class="flush-demo"><span class="a">Now &amp;</span><span class="b">Now &amp;</span></div></div>
+        <div class="sg-spec"><dl>
+          <dt>flush</dt><dd>-0.09em — flat caps N E F B H M K R</dd>
+          <dt>flush-mid</dt><dd>-0.05em — rounded C G O Q S T</dd>
+          <dt>flush-open</dt><dd>-0.03em — diagonal A V W Y X</dd>
+          <dt>Carrier</dt><dd>must sit on the element holding the display font-size</dd>
+        </dl><p class="sg-note">Dashed orange = corrected edge; grey = raw side-bearing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTION -->
+<section class="sg-section" id="motion">
+  <div class="wrap">
+    <span class="sg-label">Foundations</span>
+    <h2>Motion</h2>
+    <p class="intro">Motion is the personality. The headline acts are the <strong>3D type-room intro</strong> and the <strong>scroll-built sandwich</strong>; underneath, a runny-egg cursor, an infinite marquee, soft scroll reveals, and a slow-spinning badge keep the page alive. Premium ease-out <code>cubic-bezier(.22,1,.36,1)</code> is the workhorse curve.</p>
+
+    <div class="sg-item" id="intro">
+      <div class="sg-item-head"><h3>Kinetic type-room intro (signature)</h3><code class="sg-ref">KineticIntro.tsx</code></div>
+      <p class="sg-desc">On load, "EGG &amp; OUT" holds center on clean Farmer orange, then a one-point-perspective room of tiled wordmark text spirals in (dolly&nbsp;+&nbsp;spin) and flies through, handing off to the faint background pattern. Plays once, ~5s, then unmounts; scroll is locked underneath. Ref: 333southwabash.com "The Red".</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--farmer);color:var(--grill)"><span style="font-weight:700;text-transform:uppercase;letter-spacing:.3em;font-size:1.1rem">EGG &amp; OUT</span></div>
+        <div class="sg-spec"><dl>
+          <dt>Total</dt><dd>5.0s outer fade (times .78/.9/1)</dd>
+          <dt>Room</dt><dd>z −11000→0→1400, rotate −240→0→70</dd>
+          <dt>Curve</dt><dd>cubic-bezier(.22,1,.32,1) · 3.8s</dd>
+          <dt>Tech</dt><dd>preserve-3d; only transforms animated (opacity would flatten walls)</dd>
+        </dl></div>
+      </div>
+    </div>
+
+    <div class="sg-item" id="sandwich">
+      <div class="sg-item-head"><h3>Scroll-built sandwich (signature)</h3><code class="sg-ref">SandwichAssembly.tsx</code></div>
+      <p class="sg-desc">A 360vh sticky stage: as you scroll, ingredient layers fly in from the right and stack — base, egg, lettuce, sauce, tomato — then the brioche top drops from above and the stack settles with a gentle scale &amp; steam. The step list on the left lights Farmer as each layer lands. Ref: cravburgers.shop.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite);flex-direction:column;gap:8px">
+          <div style="width:120px;height:34px;border-radius:50%/70%;background:linear-gradient(180deg,#f0c674,#cf8a36)"></div>
+          <div style="width:150px;height:24px;border-radius:50%/75%;background:radial-gradient(circle at 50% 40%,#e8536a,#c80f2e);margin-top:-14px"></div>
+          <div style="width:170px;height:18px;border-radius:50%/90%;background:linear-gradient(180deg,#f7a23b,#f26a22);margin-top:-10px"></div>
+          <div style="width:150px;height:30px;border-radius:50%/65%;background:radial-gradient(circle at 50% 40%,#ffcd00 22%,#fffdf5 24%,#fff 70%);margin-top:-12px"></div>
+          <div style="width:120px;height:34px;border-radius:50%/70%;background:linear-gradient(180deg,#e9c074,#b97f33);margin-top:-14px"></div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Stage</dt><dd>h-[360vh] · sticky top-0 · scroll-linked</dd>
+          <dt>Layers</dt><dd>6, windowed .04→.73 of progress</dd>
+          <dt>Entrance</dt><dd>x:1000→0 (sides) / y:−900→0 (top)</dd>
+          <dt>Finish</dt><dd>scale 1→1.05 + steam fade at .73–.85</dd>
+          <dt>Layers are</dt><dd>CSS placeholders → swap for alpha PNGs</dd>
+        </dl></div>
+      </div>
+    </div>
+
+    <div class="sg-item" id="ambient">
+      <div class="sg-item-head"><h3>Runny-egg cursor, marquee &amp; reveals</h3><code class="sg-ref">CursorEgg · Marquee · Reveal · Badge</code></div>
+      <p class="sg-desc">The ambient layer: a spring-followed yolk with trailing egg-whites replaces the pointer (desktop), an orange marquee band loops the tagline, sections rise &amp; fade on scroll, and the circular stamp spins slowly.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite);flex-direction:column;gap:14px">
+          <div class="cursor-demo"><span class="cursor-white"></span><span class="cursor-yolk"></span></div>
+          <div class="mq"><span class="mq-track">ALL-DAY EGGS · NOW &amp; LATER · YOUR ANYTIME EGG SPOT · ALL-DAY EGGS · NOW &amp; LATER · </span></div>
+          <div class="anim-demo"><div class="anim-box demo-fadeup">reveal ↑</div><div class="anim-box float-demo">scroll cue ↕</div></div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Cursor</dt><dd>spring follow; yolk 3D flip + whites blob trail</dd>
+          <dt>Marquee</dt><dd>28s linear infinite (+ .reverse)</dd>
+          <dt>Reveal</dt><dd>y 32→0, opacity, 0.8s, stagger idx*0.08, once</dd>
+          <dt>Badge</dt><dd>spin-slow 18s linear</dd>
+          <dt>Hero</dt><dd>parallax textY 0→−90 on scroll</dd>
+        </dl><p class="sg-note"><strong>Reduced motion:</strong> <code>globals.css</code> guards the egg-cursor (yolk/white animations off). The framer-motion intro, reveals &amp; marquee/spin are <em>not</em> yet gated behind <code>prefers-reduced-motion</code> — tracked as a P5 accessibility item (WCAG 2.3.3).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="sg-section" id="buttons" style="background:#fff">
+  <div class="wrap">
+    <span class="sg-label">Components</span>
+    <h2>Buttons</h2>
+    <p class="intro">Two pills carry every action: <strong>Farmer orange</strong> for the primary "Order" intent and <strong>Grill</strong> for the secondary "See the menu". Same shape, same springy hover.</p>
+    <div class="sg-item" id="btn-pills">
+      <div class="sg-item-head"><h3>Pill CTAs</h3><code class="sg-ref">rounded-full · scale on hover</code></div>
+      <p class="sg-desc">"Order online / now / catering" (Farmer) and "See the menu" (Grill). The Nav order button is the small variant.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite)">
+          <a class="btn btn-farmer">Order online</a>
+          <a class="btn btn-grill">See the menu</a>
+          <a class="btn btn-farmer btn-sm">Order now</a>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Padding</dt><dd>0.875rem 1.75rem (px-7 py-3.5) · sm px-5 py-2.5</dd>
+          <dt>Radius</dt><dd>9999px (rounded-full)</dd>
+          <dt>Font</dt><dd>1rem · 700 bold · text-offwhite</dd>
+          <dt>Hover</dt><dd>scale 1.05 · active scale 0.95</dd>
+          <dt>Duration</dt><dd>300ms cubic-bezier(.22,1,.36,1)</dd>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="sg-section" id="forms">
+  <div class="wrap">
+    <span class="sg-label">Components</span>
+    <h2>Forms</h2>
+    <p class="intro">The only data-collecting surface is the <strong>catering enquiry form</strong> (in a modal). It collects name, phone, email, party size, date, time, occasion, service type &amp; notes, then hands off to the visitor's own mail app via <code>mailto:</code> — no server intake, no database.</p>
+    <div class="sg-item" id="form-field">
+      <div class="sg-item-head"><h3>Form field</h3><code class="sg-ref">FIELD util</code></div>
+      <p class="sg-desc">Borderless field on a faint Grill tint; focus raises a Farmer ring. Selects share the style.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:#fff;flex-direction:column;gap:12px">
+          <div class="fg"><input type="text" placeholder="Name"></div>
+          <div class="fg"><select><option>Catering type — Pickup / Delivery</option></select></div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Surface</dt><dd>bg-grill/5 · radius .75rem (rounded-xl) · no border</dd>
+          <dt>Pad</dt><dd>0.75rem 1rem</dd>
+          <dt>Focus</dt><dd>ring-1 Farmer + bg-grill/7</dd>
+          <dt>Fields</dt><dd>name, phone, email, people#, date, time, occasion, service, notes</dd>
+          <dt>Submit</dt><dd>mailto compose (destination TBC)</dd>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="sg-section" id="components" style="background:#fff">
+  <div class="wrap">
+    <span class="sg-label">Components</span>
+    <h2>Components</h2>
+    <p class="intro">The repeating building blocks: menu cards, the rotating badge stamp, the modal shell, and the navbar.</p>
+    <div class="sg-item" id="menu-card">
+      <div class="sg-item-head"><h3>Menu item card</h3><code class="sg-ref">Menu.tsx</code></div>
+      <p class="sg-desc">Square yolk-gradient thumbnail (placeholder for the product shot) that scales on hover, name + price row, short description.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite)">
+          <div class="eo-card"><div class="thumb"><i style="background:radial-gradient(circle at 35% 30%,#fff8d8,#ffcd00 40%,#f26a22)"></i></div><div class="row"><h4>Signature Egg Sandwich</h4><span class="price">$·</span></div><p>Brioche, folded egg, melted cheddar, crispy lacy edges.</p></div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Thumb</dt><dd>aspect-square · radius 2rem · yolk radial-gradient</dd>
+          <dt>Hover</dt><dd>image scale 1.1 · 700ms ease-out</dd>
+          <dt>Title</dt><dd>1.5rem (text-2xl) · 500 medium</dd>
+          <dt>Grid</dt><dd>1 / 2 / 3 cols · gap-x-10 gap-y-14</dd>
+        </dl></div>
+      </div>
+    </div>
+    <div class="sg-item" id="badge">
+      <div class="sg-item-head"><h3>Rotating badge stamp</h3><code class="sg-ref">Badge.tsx</code></div>
+      <p class="sg-desc">Lorena's circle badge ("Your Anytime Egg Spot") as a slowly spinning text ring with a glossy static yolk dot in the hollow. Yellow &amp; blue variants. Decorative (<code>aria-hidden</code>).</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--grill)">
+          <div class="stamp"><div class="ring"><svg viewBox="0 0 130 130" aria-hidden="true"><defs><path id="c" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs><text fill="#ffcd00" font-size="13" font-weight="700" letter-spacing="3" font-family="Capo,sans-serif"><textPath href="#c">YOUR ANYTIME EGG SPOT · YOUR ANYTIME · </textPath></text></svg></div><span class="yolk"></span></div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Spin</dt><dd>spin-slow 18s linear infinite</dd>
+          <dt>Center</dt><dd>yolk dot = size × 0.16, glossy radial</dd>
+          <dt>Sizes</dt><dd>168 (hero) · 140 (catering)</dd>
+          <dt>Variants</dt><dd>badge-yellow · badge-blue (PNG ring)</dd>
+        </dl></div>
+      </div>
+    </div>
+    <div class="sg-item" id="modal">
+      <div class="sg-item-head"><h3>Modal shell</h3><code class="sg-ref">Modals.tsx · Shell</code></div>
+      <p class="sg-desc">Order &amp; Catering pop-ups share one shell: Grill scrim with blur, cream panel that slides up, Escape-to-close, scroll-lock, <code>role="dialog"</code> + <code>aria-modal</code>. Bottom-sheet on mobile, centered card on desktop.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:rgba(33,33,33,.55)">
+          <div style="background:var(--offwhite);border-radius:1.5rem;padding:22px 24px;max-width:300px;box-shadow:0 20px 50px rgba(0,0,0,.3)">
+            <p style="font-size:.7rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--farmer);margin-bottom:6px">Catering</p>
+            <h4 style="font-size:1.4rem;font-weight:300">Bring the eggs to the party</h4>
+          </div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Scrim</dt><dd>bg-grill/55 · backdrop-blur-sm</dd>
+          <dt>Panel</dt><dd>bg-offwhite · radius 2rem · max-w-lg</dd>
+          <dt>In</dt><dd>y 40→0 · scale .98→1 · 0.32s ease-out</dd>
+          <dt>A11y</dt><dd>Esc close, scroll-lock, dialog role, labelled</dd>
+        </dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATTERNS -->
+<section class="sg-section" id="patterns">
+  <div class="wrap">
+    <span class="sg-label">Brand devices</span>
+    <h2>Patterns &amp; Shapes</h2>
+    <p class="intro">Recurring devices: the Farmer accent period, big soft corner radii, Lorena's brand art (checkerboard, arrows, pattern band), and status chips.</p>
+    <div class="sg-item" id="dot">
+      <div class="sg-item-head"><h3>The accent period</h3><code class="sg-ref">&lt;span class="text-farmer"&gt;.&lt;/span&gt;</code></div>
+      <p class="sg-desc">Most display headings end on a Farmer-orange full stop — "Find us<span style="color:var(--farmer)">.</span>", "Say hi<span style="color:var(--farmer)">.</span>" — the brand's smallest, most repeated signature.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:#fff"><span style="font-size:2.4rem;font-weight:300;text-transform:uppercase;color:var(--grill)">Find us<span style="color:var(--farmer)">.</span></span></div>
+        <div class="sg-spec"><dl><dt>Color</dt><dd>--farmer on Grill headline</dd><dt>Use</dt><dd>Hero, Menu, Locations, Footer</dd></dl></div>
+      </div>
+    </div>
+    <div class="sg-item" id="chips">
+      <div class="sg-item-head"><h3>Kickers &amp; chips</h3><code class="sg-ref">tracking-[0.35em] uppercase</code></div>
+      <p class="sg-desc">Every section opens with a Medium, widely-tracked uppercase kicker in Farmer (or Sunny on dark).</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite)"><span class="chip chip-farmer">Our menu</span><span class="chip chip-grill">About us</span><span class="chip chip-sunny">Catering</span></div>
+        <div class="sg-spec"><dl><dt>Tracking</dt><dd>0.35em (kicker) / 0.2em (meta)</dd><dt>Weight</dt><dd>500 medium · uppercase</dd></dl></div>
+      </div>
+    </div>
+    <div class="sg-item" id="radius-shape">
+      <div class="sg-item-head"><h3>Soft corners &amp; brand art</h3><code class="sg-ref">rounded-[2rem|2.5rem|3rem]</code></div>
+      <p class="sg-desc">Cards, media and the catering panel use generous radii. Lorena's PNG assets (pattern band, tonal arrows, checkerboard) supply texture — never recreated in code.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:#fff;gap:14px">
+          <div style="width:70px;height:70px;border-radius:1rem;background:var(--kraft)"></div>
+          <div style="width:70px;height:70px;border-radius:1.5rem;background:var(--broken)"></div>
+          <div style="width:70px;height:70px;border-radius:2rem;background:var(--grill)"></div>
+        </div>
+        <div class="sg-spec"><dl><dt>Cards</dt><dd>2rem · media 2.5rem · catering 3rem</dd><dt>Pills/fields</dt><dd>full / 0.75rem (xl)</dd><dt>Assets</dt><dd>pattern-bg, arrows-orange, checkerboard (PNG)</dd></dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDATIONS / TOKENS -->
+<section class="sg-section" id="foundations" style="background:#fff">
+  <div class="wrap">
+    <span class="sg-label">Reference</span>
+    <h2>Tokens &amp; Specs</h2>
+    <p class="intro">The numbers behind the look — layout, radii, easing, and the brand voice.</p>
+    <div class="sg-item">
+      <div class="sg-item-head"><h3>Core tokens</h3><code class="sg-ref">globals.css · Tailwind v4</code></div>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--offwhite);flex-direction:column;align-items:flex-start;gap:10px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip chip-grill">sm 640</span><span class="chip chip-grill">md 768</span><span class="chip chip-grill">lg 1024</span><span class="chip chip-grill">xl 1280</span></div>
+          <div style="font-size:.82rem;color:var(--gray)">container max 1400px · pad px-6 → md:px-10</div>
+        </div>
+        <div class="sg-spec"><dl>
+          <dt>Stack</dt><dd>Next.js (App Router) · Tailwind v4 · framer-motion · Lenis</dd>
+          <dt>Container</dt><dd>max-w-[1400px] · px-6 / md:px-10</dd>
+          <dt>Radius</dt><dd>full (pills) · 0.75–3rem (cards/panels)</dd>
+          <dt>Shadow</dt><dd>warm soft, e.g. 0 18px 30px -12px rgba(120,60,10,.35)</dd>
+          <dt>Easing</dt><dd>ease-out cubic-bezier(.22,1,.36,1); intro (.22,1,.32,1); marquee/spin linear</dd>
+          <dt>Breakpoints</dt><dd>Tailwind sm640 md768 lg1024 xl1280</dd>
+        </dl></div>
+      </div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-item-head"><h3>Brand voice</h3><code class="sg-ref">tone</code></div>
+      <p class="sg-desc">Playful, warm, all-day; laid-back San&nbsp;Clemente. Eggs as an anytime indulgence — never precious. By Tiger Hospitality Group.</p>
+      <div class="sg-demo">
+        <div class="sg-stage" style="background:var(--grad);color:var(--grill)"><div style="text-align:center;font-weight:500;font-size:1.15rem;max-width:420px">"Now &amp; Later. All-day eggs."</div></div>
+        <div class="sg-spec"><dl><dt>Voice</dt><dd>fun, warm, easy-going coastal</dd><dt>Taglines</dt><dd>"Your Anytime Egg Spot" · "Bring the eggs to the party"</dd><dt>Logo</dt><dd>EGG &amp; OUT logotype + monogram; sunny-side-up favicon</dd><dt>Operator</dt><dd>Tiger Hospitality Group · San Clemente, CA</dd></dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">Egg &amp; Out<span class="dot">.</span></div>
+  <p>Design System &amp; Style Guide &middot; San&nbsp;Clemente, CA &middot; egg.k13projects.com</p>
+  <div class="studio">Prepared by K13 Software Studio</div>
+</footer>
+
+</body>
+</html>
