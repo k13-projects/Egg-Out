@@ -30,8 +30,8 @@ export default function Hero() {
           Your Anytime Egg Spot
         </p>
         <h1 className="font-light leading-[0.9] tracking-tight text-grill">
-          <span className="block text-[15vw] md:text-[9rem]">NOW &amp;</span>
-          <span className="block text-[15vw] md:text-[9rem]">
+          <span className="headline-flush block text-[15vw] md:text-[9rem]">NOW &amp;</span>
+          <span className="headline-flush block text-[15vw] md:text-[9rem]">
             LATER<span className="text-farmer">.</span>
           </span>
           <span className="mt-3 block text-[9vw] font-medium md:text-[3.5rem]">
@@ -39,7 +39,7 @@ export default function Hero() {
           </span>
         </h1>
         <p className="mt-7 max-w-md text-lg leading-relaxed text-grill/70">
-          An all-day, egg-forward kitchen in San Clemente. Sandwiches, burritos,
+          An all-day, egg-forward kitchen in San&nbsp;Clemente. Sandwiches, burritos,
           and the good stuff, cracked fresh from open to close.
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-4">

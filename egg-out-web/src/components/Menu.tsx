@@ -43,7 +43,7 @@ export default function Menu() {
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.35em] text-farmer">
             Our menu
           </p>
-          <h2 className="max-w-3xl text-[11vw] font-light leading-[0.95] tracking-tight md:text-7xl">
+          <h2 className="headline-flush max-w-3xl text-[11vw] font-light leading-[0.95] tracking-tight md:text-7xl">
             Eggs lead the way<span className="text-farmer">.</span>
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-grill/70">

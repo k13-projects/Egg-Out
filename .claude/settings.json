@@ -32,7 +32,10 @@
       "Bash(grep -q \"Ready\" /tmp/eggout-dev.log)",
       "Bash(break)",
       "Bash(curl -s -o /dev/null -w \"first: %{http_code}\\\\n\" --max-time 60 http://localhost:9149/)",
-      "Bash(curl -s -o /dev/null -w \"second: %{http_code}\\\\n\" --max-time 30 http://localhost:9149/)"
+      "Bash(curl -s -o /dev/null -w \"second: %{http_code}\\\\n\" --max-time 30 http://localhost:9149/)",
+      "Read(//Users/k13/Desktop/PROJECTS/K13-WarRoom/starter-kit/templates/**)",
+      "Read(//Users/k13/Desktop/PROJECTS/K13-WarRoom/.k13/profiles/**)",
+      "Read(//Users/k13/Desktop/PROJECTS/K13-WarRoom/**)"
     ],
     "additionalDirectories": [
       "/private/tmp"

@@ -36,7 +36,7 @@ export default function Catering() {
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.35em] text-sunny">
                 Catering
               </p>
-              <h2 className="text-[11vw] font-light leading-[0.95] tracking-tight md:text-7xl">
+              <h2 className="headline-flush text-[11vw] font-light leading-[0.95] tracking-tight md:text-7xl">
                 Bring the eggs to the party.
               </h2>
               <p className="mt-7 max-w-md text-lg leading-relaxed text-offwhite/70">

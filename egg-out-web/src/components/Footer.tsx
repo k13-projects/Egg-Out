@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px]">
         <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:items-end">
           <div className="max-w-md">
-            <h2 className="text-[12vw] font-light leading-none tracking-tight md:text-7xl">
+            <h2 className="headline-flush-mid text-[12vw] font-light leading-none tracking-tight md:text-7xl">
               Say hi<span className="text-farmer">.</span>
             </h2>
             <p className="mt-6 text-lg text-offwhite/60">
@@ -41,7 +41,7 @@ export default function Footer() {
 
         <div className="mt-20 flex flex-col gap-2 border-0 text-sm text-offwhite/40 md:flex-row md:justify-between">
           <p>© {2026} Egg &amp; Out · Tiger Hospitality Group</p>
-          <p>San Clemente, CA · Daily 8:00 AM to 2:00 PM</p>
+          <p>San&nbsp;Clemente, CA · Daily 8:00 AM to 2:00 PM</p>
         </div>
       </div>
     </footer>

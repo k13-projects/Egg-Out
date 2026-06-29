@@ -8,12 +8,12 @@ export default function About() {
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.35em] text-farmer">
             About us
           </p>
-          <h2 className="text-[10vw] font-light leading-[0.98] tracking-tight md:text-6xl">
+          <h2 className="headline-flush-open text-[10vw] font-light leading-[0.98] tracking-tight md:text-6xl">
             An egg spot that never clocks out.
           </h2>
           <p className="mt-7 max-w-md text-lg leading-relaxed text-grill/70">
             Egg &amp; Out is an all-day, egg-forward kitchen rooted in a love for
-            bold egg flavors and the laid-back rhythm of San Clemente. We believe
+            bold egg flavors and the laid-back rhythm of San&nbsp;Clemente. We believe
             eggs aren&apos;t just for mornings; they&apos;re for whenever hunger
             hits.
           </p>

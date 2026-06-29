@@ -198,7 +198,7 @@ export default function SandwichAssembly() {
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.35em] text-farmer">
               Built to order
             </p>
-            <h2 className="mb-3 text-[12vw] font-light leading-[0.9] tracking-tight md:text-7xl">
+            <h2 className="headline-flush-mid mb-3 text-[12vw] font-light leading-[0.9] tracking-tight md:text-7xl">
               The Signature.
             </h2>
             <p className="mb-10 max-w-sm text-lg leading-relaxed text-grill/60">

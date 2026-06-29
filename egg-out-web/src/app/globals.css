@@ -35,6 +35,31 @@ body {
   color: var(--color-offwhite);
 }
 
+/* ----------------------------------------------------------
+   Optical flush — a flush-left display heading's first glyph
+   carries a left side-bearing, so its ink sits to the RIGHT of
+   the small tagline/paragraph edge and reads as nudged inward.
+   A negative text-indent (= that bearing) pulls the glyph back
+   onto the line so the eye sees one clean left edge.
+
+   The bearing depends on the first LETTER, so we bucket by
+   glyph shape (values measured for Capo Light via canvas
+   actualBoundingBoxLeft). em-based → constant across every
+   responsive size. MUST sit on the element carrying the display
+   font-size (text-indent resolves em against THAT element and
+   inherits as a fixed length) — so in Hero it goes on the big
+   <span>s, not the <h1>. Tune the three knobs here once.
+---------------------------------------------------------- */
+@utility headline-flush {
+  text-indent: -0.09em; /* flat-left caps: N E F B H M K R … (~13px @144) */
+}
+@utility headline-flush-mid {
+  text-indent: -0.05em; /* C G O Q S T … rounded / overhang */
+}
+@utility headline-flush-open {
+  text-indent: -0.03em; /* A V W Y X … diagonal / open apex */
+}
+
 /* Kinetic marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
