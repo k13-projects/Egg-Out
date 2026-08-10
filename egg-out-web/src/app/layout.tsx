@@ -19,6 +19,21 @@ export const metadata: Metadata = {
   title: "EGG & OUT · Your Anytime Egg Spot",
   description:
     "All-day, egg-forward eats in San Clemente. Now & later, all-day eggs.",
+  // Private stakeholder preview — must not appear in search results.
+  // Lift this only on the real Egg & Out domain. See src/app/robots.ts.
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": 0,
+      "max-image-preview": "none",
+      "max-snippet": 0,
+    },
+  },
 };
 
 export default function RootLayout({
